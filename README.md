@@ -11,5 +11,5 @@ Dialog for Item
 Dialog for Menu
 Dialog for shop
 ChestCommand export + import
-VirtualChest export + import
+VirtualChest export + import 
 
