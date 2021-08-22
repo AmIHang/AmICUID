@@ -1,0 +1,36 @@
+TODO
+
+ItemDlg
+    ID
+    ItemID
+    Name
+    Lore
+    X/Y
+    OnClick?
+
+PokemonDlg --Extension
+    ID
+    ItemID ?? photo
+    Name
+    Lore
+    X/Y
+    OnClick?
+    Unsafe Data
+
+
+CommandDlg
+
+ShopDlg
+    ID
+    ItemID
+    Name
+    Lore
+    X/Y
+    ReqItem
+    ReqItemAmount
+    GetItem
+    GetItemAmount
+
+
+---Update:
+Perm system
