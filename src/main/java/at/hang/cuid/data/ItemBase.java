@@ -7,7 +7,9 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Data
-public abstract class ItemBase implements Serializable {
+public class ItemBase implements Serializable {
+
+    protected String itemType="@ItemBase";
 
     protected String identifier; //x
     protected String itemId; //x

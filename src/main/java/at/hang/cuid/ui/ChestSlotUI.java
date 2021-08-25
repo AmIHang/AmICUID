@@ -1,6 +1,7 @@
 package at.hang.cuid.ui;
 
 import at.hang.cuid.data.ItemBase;
+import at.hang.cuid.data.Pokemon;
 import lombok.Getter;
 import lombok.Setter;
 

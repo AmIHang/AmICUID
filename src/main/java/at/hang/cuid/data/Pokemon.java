@@ -6,7 +6,21 @@ import lombok.Data;
 import java.util.Locale;
 
 @Data
-public class Pokemon extends Item {
+public class Pokemon extends ItemBase {
+
+
+    {
+        itemType = "@Pokemon";
+    }
+
+    public Pokemon(ItemBase item)
+    {
+        this.setIdentifier(item.getIdentifier());
+        this.setItemId(item.getItemId());
+        this.x = item.getX();
+        this.y = item.getY();
+        this.setUnsafeData(unsafeData);
+    }
 
     public Pokemon(PokemonEnum pkm, int x, int y)
     {
@@ -31,6 +45,11 @@ public class Pokemon extends Item {
     public void setForm(String form)
     {
         this.unsafeData +="-"+form;
+    }
+
+    public String toString()
+    {
+        return "+";
     }
 
 }

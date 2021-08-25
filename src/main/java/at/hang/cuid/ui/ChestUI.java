@@ -1,5 +1,6 @@
 package at.hang.cuid.ui;
 
+import at.hang.cuid.bl.CUIDBl;
 import at.hang.cuid.bl.ChestBl;
 import at.hang.cuid.data.ItemBase;
 import at.hang.cuid.data.Pokemon;
@@ -16,7 +17,7 @@ import java.awt.event.MouseEvent;
 public class ChestUI extends JFrame {
 
     @Getter
-    private ChestBl bl;
+    private ChestBl chestBl;
 
     private boolean strg = false;
 
@@ -24,15 +25,19 @@ public class ChestUI extends JFrame {
 
     public ChestUI(String name, int rowCount)
     {
-        bl = new ChestBl(name,rowCount);
+        chestBl = new ChestBl(name,rowCount);
         init();
+    }
 
-
+    public ChestUI(ChestBl chestBl)
+    {
+        this.chestBl = chestBl;
+        init();
     }
 
     public  ChestUI(int rowCount)
     {
-        bl = new ChestBl("Unnamed", rowCount);
+        chestBl = new ChestBl("Unnamed", rowCount);
 
         init();
     }
@@ -67,26 +72,26 @@ public class ChestUI extends JFrame {
             this.remove(plContainer);
 
         plContainer = new JPanel();
-        plContainer.setLayout(new GridLayout(bl.getItems().length+1, 1,0,2));
+        plContainer.setLayout(new GridLayout(chestBl.getItems().length+1, 1,0,2));
         plContainer.setName("plContainer");
 
         //Setting headline
         JLabel lbTitle = new JLabel();
         lbTitle.setName("lbHeadline");
-        lbTitle.setText(bl.getName());
+        lbTitle.setText(chestBl.getName());
         plContainer.add(lbTitle);
 
         //Set Items
         JPanel row;
         ChestSlotUI slot;
-        for(int r = 0; r < bl.getItems().length; r++)
+        for(int r = 0; r < chestBl.getItems().length; r++)
         {
             row = new JPanel();
             row.setName("plRow"+r);
             row.setLayout(new GridLayout(1,9,2,0));
 
             for(int c = 0; c < 9; c++) {
-                slot = new ChestSlotUI(bl.getItemAt(r, c));
+                slot = new ChestSlotUI(chestBl.getItemAt(r, c));
                 slot.setName(r+"/"+c);
                 row.add(slot);
             }
@@ -128,8 +133,8 @@ public class ChestUI extends JFrame {
         }
 
         PokemonDlg dlg = null;
-        if(bl.getItemAt(Integer.parseInt(slot.getName().split("/")[0]),Integer.parseInt(slot.getName().split("/")[1])) instanceof ItemBase)
-            dlg = new PokemonDlg(this, Integer.parseInt(slot.getName().split("/")[0]), Integer.parseInt(slot.getName().split("/")[1]), (Pokemon) bl.getItemAt(Integer.parseInt(slot.getName().split("/")[0]),Integer.parseInt(slot.getName().split("/")[1])));
+        if(chestBl.getItemAt(Integer.parseInt(slot.getName().split("/")[0]),Integer.parseInt(slot.getName().split("/")[1])) instanceof ItemBase)
+            dlg = new PokemonDlg(this, Integer.parseInt(slot.getName().split("/")[0]), Integer.parseInt(slot.getName().split("/")[1]), (Pokemon) chestBl.getItemAt(Integer.parseInt(slot.getName().split("/")[0]),Integer.parseInt(slot.getName().split("/")[1])));
         else
             dlg = new PokemonDlg(this, Integer.parseInt(slot.getName().split("/")[0]), Integer.parseInt(slot.getName().split("/")[1]));
 
@@ -140,12 +145,12 @@ public class ChestUI extends JFrame {
 
         if(dlg.isOkay())
         {
-            bl.setItem(dlg.getPokemon(),dlg.getPokemon().getX(), dlg.getPokemon().getY());
+            chestBl.setItemAt(dlg.getPokemon().getX(), dlg.getPokemon().getY(), dlg.getPokemon());
             slot.setItem(dlg.getPokemon());
         }
         else if(dlg.isDelete())
         {
-            bl.setItem(null,Integer.parseInt(slot.getName().split("/")[0]), Integer.parseInt(slot.getName().split("/")[1]));
+            chestBl.setItemAt(Integer.parseInt(slot.getName().split("/")[0]), Integer.parseInt(slot.getName().split("/")[1]), null);
             slot.setItem(null);
         }
 
@@ -159,12 +164,8 @@ public class ChestUI extends JFrame {
             {
                 case 83:
                 {
-                    bl.save();
-                }break;
-                case 76:
-                {
-                    bl.load(JOptionPane.showInputDialog("filename"));
-                    updateData();
+                    CUIDBl.getInstance().saveChestInventory(chestBl);
+                    System.out.println("Save");
                 }break;
                 default:
                     System.out.println("no command");
