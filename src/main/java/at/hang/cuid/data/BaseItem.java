@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Data
-public class ItemBase implements Serializable {
+public class BaseItem implements Serializable {
 
     protected String itemType="@ItemBase";
 
@@ -20,7 +20,7 @@ public class ItemBase implements Serializable {
 
     protected String unsafeData;
 
-    public ItemBase()
+    public BaseItem()
     {
 
     }

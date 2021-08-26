@@ -1,6 +1,6 @@
 package at.hang.cuid.util;
 
-import at.hang.cuid.data.ItemBase;
+import at.hang.cuid.data.BaseItem;
 import at.hang.cuid.data.Pokemon;
 
 import java.util.Locale;
@@ -19,18 +19,7 @@ public class AmIUtils
         return out;
     }
 
-    public static ItemBase convertItem(ItemBase item)
-    {
-        System.out.println("con");
-        if(item == null)
-            return null;
 
-        switch(item.getItemType())
-        {
-            case "@Pokemon": return new Pokemon(item);
-            default: return item;
-        }
-    }
 
 
 }

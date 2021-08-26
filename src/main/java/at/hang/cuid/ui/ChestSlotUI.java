@@ -1,17 +1,17 @@
 package at.hang.cuid.ui;
 
-import at.hang.cuid.data.ItemBase;
-import at.hang.cuid.data.Pokemon;
+import at.hang.cuid.data.BaseItem;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ChestSlotUI<Item> extends JPanel {
+public class ChestSlotUI extends JPanel {
+
 
     @Getter @Setter
-    private ItemBase item = null;
+    private BaseItem item = null;
     private JLabel lbText = new JLabel();
 
     public ChestSlotUI()
@@ -19,7 +19,7 @@ public class ChestSlotUI<Item> extends JPanel {
         init();
     }
 
-    public ChestSlotUI(ItemBase item)
+    public ChestSlotUI(BaseItem item)
     {
         this.item = item;
         init();
@@ -41,7 +41,7 @@ public class ChestSlotUI<Item> extends JPanel {
 
     }
 
-    public void setItem(ItemBase item)
+    public void setItem(BaseItem item)
     {
         this.item = item;
         updateText();

@@ -2,7 +2,7 @@ package at.hang.cuid.ui;
 
 import at.hang.cuid.bl.CUIDBl;
 import at.hang.cuid.bl.ChestBl;
-import at.hang.cuid.data.ItemBase;
+import at.hang.cuid.data.BaseItem;
 import at.hang.cuid.data.Pokemon;
 import at.hang.cuid.dlg.PokemonDlg;
 import lombok.Getter;
@@ -133,7 +133,7 @@ public class ChestUI extends JFrame {
         }
 
         PokemonDlg dlg = null;
-        if(chestBl.getItemAt(Integer.parseInt(slot.getName().split("/")[0]),Integer.parseInt(slot.getName().split("/")[1])) instanceof ItemBase)
+        if(chestBl.getItemAt(Integer.parseInt(slot.getName().split("/")[0]),Integer.parseInt(slot.getName().split("/")[1])) instanceof BaseItem)
             dlg = new PokemonDlg(this, Integer.parseInt(slot.getName().split("/")[0]), Integer.parseInt(slot.getName().split("/")[1]), (Pokemon) chestBl.getItemAt(Integer.parseInt(slot.getName().split("/")[0]),Integer.parseInt(slot.getName().split("/")[1])));
         else
             dlg = new PokemonDlg(this, Integer.parseInt(slot.getName().split("/")[0]), Integer.parseInt(slot.getName().split("/")[1]));

@@ -1,6 +1,6 @@
 package at.hang.cuid.bl;
 
-import at.hang.cuid.data.ItemBase;
+import at.hang.cuid.data.BaseItem;
 import at.hang.cuid.data.Pokemon;
 import at.hang.cuid.util.AmIUtils;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class ChestBl
     @Getter @Setter
     private String name;
     @Getter @Setter
-    private ItemBase items[][];
+    private BaseItem items[][];
 
     public ChestBl()
     {
@@ -27,10 +27,10 @@ public class ChestBl
     public ChestBl(String name, int rowCount)
     {
         this.name = name;
-        items = new ItemBase[rowCount][9];
+        items = new BaseItem[rowCount][9];
     }
 
-    public ItemBase getItemAt(int row, int col)
+    public BaseItem getItemAt(int row, int col)
     {
         return items[row][col];
     }
@@ -39,12 +39,6 @@ public class ChestBl
         items[row][col] = pkm;
     }
 
-    public void validateItems()
-    {
-        for(int r = 0; r < items.length; r++)
-            for(int c = 0; c < items[r].length; c++)
-                items[r][c] = AmIUtils.convertItem(items[r][c]);
-    }
 
 
 

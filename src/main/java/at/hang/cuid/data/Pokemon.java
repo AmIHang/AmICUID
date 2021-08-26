@@ -6,14 +6,14 @@ import lombok.Data;
 import java.util.Locale;
 
 @Data
-public class Pokemon extends ItemBase {
+public class Pokemon extends BaseItem {
 
 
     {
         itemType = "@Pokemon";
     }
 
-    public Pokemon(ItemBase item)
+    public Pokemon(BaseItem item)
     {
         this.setIdentifier(item.getIdentifier());
         this.setItemId(item.getItemId());

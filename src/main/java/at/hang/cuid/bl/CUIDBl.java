@@ -1,5 +1,7 @@
 package at.hang.cuid.bl;
 
+import at.hang.cuid.data.BaseItem;
+import at.hang.cuid.data.Pokemon;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -54,7 +56,8 @@ public class CUIDBl {
         {
             br = new BufferedReader(new FileReader(new File(path+"\\"+filename)));
             ChestBl chestBl = gson.fromJson(br, ChestBl.class);
-            chestBl.validateItems();
+
+            validateItems(chestBl);
             return chestBl;
         }
         catch(FileNotFoundException nfe)
@@ -91,6 +94,22 @@ public class CUIDBl {
         }
 
         return uniqueName;
+    }
+
+    private void validateItems(ChestBl chestBl)
+    {
+        for(int r = 0; r < chestBl.getItems().length; r++)
+        {
+            for(int c = 0;  c <  chestBl.getItems()[r].length; c++) {
+                if(chestBl.getItemAt(r,c) != null) {
+                    switch (chestBl.getItemAt(r, c).getItemType()) {
+                        case "@Pokemon":
+                            chestBl.setItemAt(r, c, new Pokemon(chestBl.getItemAt(r, c)));
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     public static CUIDBl getInstance()
